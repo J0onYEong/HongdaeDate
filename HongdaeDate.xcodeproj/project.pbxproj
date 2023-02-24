@@ -11,6 +11,7 @@
 		9BF2947929A760F700DCCFF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2947829A760F700DCCFF7 /* ContentView.swift */; };
 		9BF2947B29A760F900DCCFF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF2947A29A760F900DCCFF7 /* Assets.xcassets */; };
 		9BF2947F29A760F900DCCFF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF2947E29A760F900DCCFF7 /* Preview Assets.xcassets */; };
+		9BFBDEDE29A8A96E00669528 /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFBDEDD29A8A96E00669528 /* ContentView-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		9BF2947A29A760F900DCCFF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BF2947C29A760F900DCCFF7 /* HongdaeDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HongdaeDate.entitlements; sourceTree = "<group>"; };
 		9BF2947E29A760F900DCCFF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9BFBDEDD29A8A96E00669528 /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				9BF2947629A760F700DCCFF7 /* HongdaeDateApp.swift */,
 				9BF2947829A760F700DCCFF7 /* ContentView.swift */,
+				9BFBDEDD29A8A96E00669528 /* ContentView-ViewModel.swift */,
 				9BF2947A29A760F900DCCFF7 /* Assets.xcassets */,
 				9BF2947C29A760F900DCCFF7 /* HongdaeDate.entitlements */,
 				9BF2947D29A760F900DCCFF7 /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BF2947929A760F700DCCFF7 /* ContentView.swift in Sources */,
+				9BFBDEDE29A8A96E00669528 /* ContentView-ViewModel.swift in Sources */,
 				9BF2947729A760F700DCCFF7 /* HongdaeDateApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +273,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "앱을 사용하는 동안 사용자의 위치 정보를 사용합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "항상 사용자의 위치 정보를 사용합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱을 사용하는 동안 사용자의 위치 정보를 사용합니다.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -307,6 +314,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "앱을 사용하는 동안 사용자의 위치 정보를 사용합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "항상 사용자의 위치 정보를 사용합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱을 사용하는 동안 사용자의 위치 정보를 사용합니다.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
