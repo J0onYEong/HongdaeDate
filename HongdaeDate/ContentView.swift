@@ -12,18 +12,34 @@ struct ContentView: View {
     @StateObject private var viewModel = ContentView_ViewModel()
     
     
-    // Binding state
-    @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 35.5936, longitude: 129.352), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+    // - Binding state
+    
+    // 유저가 검색할때 쓰이는 문자열
+    @State private var mainSearchString = ""
     
     var body: some View {
         VStack {
             ZStack {
-                Map(coordinateRegion: $coordinateRegion)
-                    .onChange(of: viewModel.currentLocation) { current in
-                        if let location = current {
-                            coordinateRegion.center = location.coordinate
-                        }
+                // 메인 맵
+                Map(coordinateRegion: $viewModel.coordinateRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: viewModel.searchAnnotationCollection, annotationContent: { item in
+                    MapMarker(coordinate: item.placemark.coordinate, tint: .red)
+                })
+                .ignoresSafeArea()
+                .onAppear {
+                    viewModel.setCoordinateToDefault()
+                    viewModel.reqeustCurrentLocation()
+                }
+                
+                // 검색창
+                GeometryReader { geo in
+                    MainSearchView(inputString: $mainSearchString) {
+                        viewModel.startSeachCompleter(searchString: mainSearchString)
                     }
+                        .padding([.leading, .trailing], 10)
+                        .position(x: geo.size.width/2, y: geo.size.height/15)
+                }
+                
+                // 현재 디바이스로 이동하는 버튼
                 GeometryReader { geo in
                     Button {
                         viewModel.reqeustCurrentLocation()
@@ -32,9 +48,9 @@ struct ContentView: View {
                             .resizable()
                             .scaledToFit()
                             .foregroundColor(.secondary)
-                            .frame(width: 70, height: 70)
-                            .position(x: geo.size.width*0.9, y: geo.size.height*0.95)
+                            .frame(width: 50, height: 50)
                     }
+                    .position(x: geo.size.width-40, y: geo.size.height-40)
                 }
             }
         }
