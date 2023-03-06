@@ -20,7 +20,7 @@ struct MainSearchView: View {
                 .scaledToFit()
                 .foregroundColor(.secondary.opacity(0.75))
                 .frame(maxHeight: 30)
-            TextField("위치정보를 입력하세요", text: $inputString)
+            TextField("카테고리를 검색하세요", text: $inputString)
                 .frame(minHeight: 40)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
@@ -30,7 +30,7 @@ struct MainSearchView: View {
         .padding(5)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white.opacity(focusState ? 0.5 : 0.3))
+                .fill(Color.white.opacity(focusState ? 0.8 : 0.5))
                 .shadow(radius: 10)
         )
         .onSubmit {

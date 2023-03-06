@@ -126,7 +126,6 @@ extension ContentView_ViewModel {
     
     func startSeachCompleter(searchString: String) {
         localSearchCompleterDelegate.searchCompleter.queryFragment = searchString
-        // 현재 지도의 주앙을 기준으로 탐색을 한다.
         localSearchCompleterDelegate.searchCompleter.region = MKCoordinateRegion(center: coordinateRegion.center, latitudinalMeters: searchDistance, longitudinalMeters: searchDistance)
     }
     

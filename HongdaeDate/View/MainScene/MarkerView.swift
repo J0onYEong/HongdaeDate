@@ -9,9 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MarkerView: View {
-    @StateObject var viewModel = MarkerView_ViewModel()
-    
-    var item: MKMapItem
+    var item: LocationItem
     var perform: (() -> ())?
     
     var body: some View {
@@ -29,7 +27,7 @@ struct MarkerView: View {
                                 Circle()
                                     .fill(.white)
                             )
-                        Image(systemName: viewModel.getImageName(item.pointOfInterestCategory))
+                        Image(systemName: item.getImageName())
                             .resizable()
                             .scaledToFit()
                             .foregroundColor(.white)
@@ -44,6 +42,6 @@ struct MarkerView: View {
 
 struct MarkerView_Previews: PreviewProvider {
     static var previews: some View {
-        MarkerView(item: MKMapItem())
+        MarkerView(item: LocationItem.example)
     }
 }

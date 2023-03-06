@@ -24,15 +24,16 @@ struct ContentView: View {
                 // 메인 맵
                 Map(coordinateRegion: $coordinateRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: viewModel.searchAnnotationCollection, annotationContent: { locationItem in
                     MapAnnotation(coordinate: locationItem.mapItem.placemark.coordinate) {
-                        MarkerView(item: locationItem.mapItem) {
-                            selectionItem = locationItem
+                        MarkerView(item: locationItem) {
+                            withAnimation {
+                                selectionItem = locationItem
+                            }
                         }
                         .frame(width: 30, height: 30)
                     }
                 })
                 .ignoresSafeArea()
                 .onAppear {
-                    // 현재 디바이스 위치를 맵의 중앙으로 설정
                     viewModel.reqeustCurrentLocation()
                 }
                 .onChange(of: viewModel.coordinateRegion) { newValue in
@@ -53,6 +54,13 @@ struct ContentView: View {
                     }
                         .padding([.leading, .trailing], 10)
                         .position(x: geo.size.width/2, y: geo.size.height/15)
+                        .onChange(of: viewModel.searchAnnotationCollection) { array in
+                            if !array.isEmpty {
+                                withAnimation {
+                                    selectionItem = array[0]
+                                }
+                            }
+                        }
                 }
                 
                 // 현재 디바이스로 이동하는 버튼
@@ -73,21 +81,22 @@ struct ContentView: View {
                 
                 if let item = selectionItem {
                     if let index = viewModel.searchAnnotationCollection.findIndex(item) {
-                        if index == viewModel.searchAnnotationCollection.count-1 {
-                            LocationDetailView(item: $selectionItem)
-                        }
-                        else {
-                            LocationDetailView(item: $selectionItem) {
-                                // Sheet의 아이템을 변경한다.
-                                let nextItem = viewModel.searchAnnotationCollection[index+1]
-                                selectionItem = nextItem
-                                
-                                withAnimation {
-                                    // 현재 세부정보를 보고있는 장소로 맵의 중앙을 이동시킨다.
-                                    viewModel.setCoordinateRegion(nextItem.mapItem.placemark.coordinate)
-                                }
+                        let nextIndex = index == viewModel.searchAnnotationCollection.count-1 ? 0 : index+1
+                        LocationDetailView(item: item) {
+                            // Sheet의 아이템을 변경한다.
+                            let nextItem = viewModel.searchAnnotationCollection[nextIndex]
+                            selectionItem = nextItem
+                            
+                            withAnimation {
+                                // 현재 세부정보를 보고있는 장소로 맵의 중앙을 이동시킨다.
+                                viewModel.setCoordinateRegion(nextItem.mapItem.placemark.coordinate)
+                            }
+                        } dismiss: {
+                            withAnimation {
+                                selectionItem = nil
                             }
                         }
+                        .transition(.move(edge: .bottom))
                     }
                 }
             }

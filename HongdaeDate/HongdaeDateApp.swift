@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct HongdaeDateApp: App {
+    
+    @StateObject var obj = UserEnvironment()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(obj)
         }
     }
 }
