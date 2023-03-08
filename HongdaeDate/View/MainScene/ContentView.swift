@@ -11,12 +11,15 @@ import MapKit
 struct ContentView: View {
     @StateObject private var viewModel = ContentView_ViewModel()
     
-    // - Binding state
+    // Binding state
     @State private var coordinateRegion = MKCoordinateRegion(center: ContentView_ViewModel.defaultCoordinate, latitudinalMeters: ContentView_ViewModel.defaultSpan, longitudinalMeters: ContentView_ViewModel.defaultSpan)
     @State private var selectionItem: LocationItem?
     
     // 유저가 검색할때 쓰이는 문자열
     @State private var mainSearchString = ""
+    
+    // 임시적으로 Sheet에 유저뷰를 구현
+    @State private var showingUserView = false
     
     var body: some View {
         VStack {
@@ -63,20 +66,33 @@ struct ContentView: View {
                         }
                 }
                 
-                // 현재 디바이스로 이동하는 버튼
+                // 현재위치 이동 버튼, 유저 페이지 접속 버튼
                 GeometryReader { geo in
-                    Button {
-                        withAnimation {
-                            viewModel.reqeustCurrentLocation()
+                    ZStack {
+                        Button {
+                            withAnimation {
+                                viewModel.reqeustCurrentLocation()
+                            }
+                        } label: {
+                            Image(systemName: "location.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.secondary)
+                                .frame(width: 50, height: 50)
                         }
-                    } label: {
-                        Image(systemName: "location.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.secondary)
-                            .frame(width: 50, height: 50)
+                        .position(x: geo.size.width-40, y: geo.size.height-50)
+                        
+                        Button {
+                            showingUserView = true
+                        } label: {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.secondary)
+                                .frame(width: 50, height: 50)
+                        }
+                        .position(x: 40, y: geo.size.height-50)
                     }
-                    .position(x: geo.size.width-40, y: geo.size.height-40)
                 }
                 
                 if let item = selectionItem {
@@ -100,6 +116,9 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showingUserView) {
+            UserView()
         }
     }
 }
